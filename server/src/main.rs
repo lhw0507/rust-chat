@@ -1,5 +1,5 @@
 use std::{
-    io::Read,
+    io::{Read, Write},
     net::{Ipv4Addr, SocketAddrV4},
 };
 
@@ -17,6 +17,7 @@ fn main() {
                 match stream.read(&mut buf) {
                     Ok(_) => {
                         let s = std::str::from_utf8(&buf).unwrap();
+                        stream.write(&buf);
                         println!("we are here, {}", s);
                     }
                     Err(e) => println!("failed to read from socket; err = {:?}", e),
